@@ -1,10 +1,8 @@
-// WIP
 (() => {
   let current = 0;
   let count = 0;
-  // for New Yorker:
-  // let entries = document.querySelectorAll('#articleBody p').entries();
-  let entries = document.querySelectorAll('p').entries();
+  let entries = getMyEntries();
+
   // in case we need to access the index of the paragraph
   for (const [idx, el] of entries) {
     // TODO: split text more intelligently
@@ -38,11 +36,12 @@
   });
 })();
 
-function smartSplit(s){
+function smartSplit(s) {
   // These should all end in a sentence ender
   const EXCEPTIONS = ["... ",
                       "a.m. ",
                       "p.m. ",
+                      "U.S.",
                       "Mr. ",
                       "Ms. ",
                       "Mrs. ",
@@ -97,6 +96,18 @@ function smartSplit(s){
   }
   A.push(s.substr(nextSentenceStart, s.length - nextSentenceStart));
   return A;
+}
+
+function getMyEntries() {
+  href = window.location.href;
+  href = href.toLowerCase();
+  if (href.indexOf("newyorker.com") >= 0) {
+    return document.querySelectorAll('#articleBody p').entries();
+  }
+  if (href.indexOf("techcrunch.com") >= 0) {
+    return document.querySelectorAll('.article__content-wrap p').entries();
+  }
+  return document.querySelectorAll('p').entries();
 }
 
 // Test cases
