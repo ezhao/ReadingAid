@@ -50,7 +50,10 @@ function smartSplit(s) {
                       "Sep. ",
                       "Oct. ",
                       "Nov. ",
-                      "Dec. "];
+                      "Dec. ",
+                      "St.",
+                      "B.A.",
+                      ];
 
   // These should all end in a space character
   const SENTENCE_ENDERS = [". ",
